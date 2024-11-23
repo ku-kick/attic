@@ -1,15 +1,17 @@
 #!/bin/bash
 
-# Load dummy module
-sudo modprobe dummy
 # Create
-sudo ip link add eth_dummy type dummy
+sudo ip link add eth_dummy type veth peer name eth_dummy1
+
+# Handle the first end
 # Assign IP
 sudo ip addr add 192.168.1.100/24 dev eth_dummy
 # Bring up
-sudo ip link set eth_dummy up
+sudo ip link set eth_dummy
 # Verify
 ip addr show eth_dummy
 
-# Add ip addr for this host as well
-sudo ip addr add 192.168.1.40/24 dev eth_dummy
+# Handle the second end
+sudo ip addr add 192.168.1.200/24 dev eth_dummy1
+sudo ip link set eth_dummy1
+ip addr show eth_dummy1
