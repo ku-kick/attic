@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # Network
-IPNET=192.168.1.0/24
+IPNET=10.10.1.0/24
 # IP of the container
-IP=192.168.1.90
+IP=10.10.1.90
 # Host gateway
-GATE=192.168.1.100
+GATE=10.10.1.100
 # Name for the network
 NETNAME=docker_dummy
 # Interface name
