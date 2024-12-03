@@ -11,5 +11,7 @@ sudo ip link set eth_dummy up
 # Verify
 ip addr show eth_dummy
 
-# Add ip addr for this host as well
-sudo ip addr add 192.168.1.40/24 dev eth_dummy
+#sudo ip addr add 192.168.1.40/24 dev eth_dummy
+
+# Set prostitution mode
+ip link set eth_dummy promisc on
