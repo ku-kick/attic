@@ -9,7 +9,7 @@ GATE=192.168.1.100
 # Name for the network
 NETNAME=docker_dummy
 # Interface name
-IFNAME=ens33
+IFNAME=eth_dummy
 docker network create -d macvlan --subnet=$IPNET --gateway=$GATE -o parent=$IFNAME $NETNAME
 docker run -it --rm --network $NETNAME --ip $IP ubuntu-pimped /bin/bash
 #docker run -it --rm --network $NETNAME ubuntu-pimped /bin/bash
