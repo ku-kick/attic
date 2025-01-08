@@ -61,10 +61,12 @@ echo Unsharing into namespaces, chrooting
 #	--ipc=$MOUNTDIR/$NAME-ipc \
 #	/bin/bash -c "echo chrooting into the rootfs ; chroot $ROOTFS"
 sudo unshare \
-	--net=/var/run/netns/$NAME-net \
+	--pid \
 	--keep-caps \
 	--mount=$MOUNTDIR/$NAME-mount \
-	/bin/bash -c "echo chrooting into the rootfs ; chroot $ROOTFS"
+	--root=$ROOTFS \
+	--fork \
+	/bin/bash
 
 if false ; then
 	echo Chrooting into the fs
@@ -74,4 +76,25 @@ fi
 if true ; then 
 	echo Removing veth
 	NAMESPACE_NAME=$NAME-net remove-virtual-ethernet-namespace.sh
+
+	echo umounting...
+	#sudo fuser -k $ROOTFS/proc
+	#sudo fuser -k $ROOTFS/sys
+	#sudo fuser -k $ROOTFS/dev
+	#sudo fuser -k $ROOTFS
+	#sudo fuser -k $MOUNTDIR/debian
+
+	#sudo fuser -k $MOUNTDIR/$NAME-mount
+	#sudo fuser -k $MOUNTDIR/$NAME-uts
+	#sudo fuser -k $MOUNTDIR/$NAME-pid
+	#sudo fuser -k $MOUNTDIR/$NAME-net
+
+	sudo umount $MOUNTDIR/$NAME-mount
+	sudo umount $MOUNTDIR/$NAME-uts
+	sudo umount $MOUNTDIR/$NAME-pid
+
+	sudo umount $ROOTFS/proc
+	sudo umount $ROOTFS/sys
+	sudo umount $ROOTFS/dev
+	sudo umount $MOUNTDIR
 fi
