@@ -59,9 +59,13 @@ echo Unsharing into namespaces, chrooting
 #	--net=$MOUNTDIR/$NAME-net \
 #	--mount=$MOUNTDIR/$NAME-mount \
 #	--ipc=$MOUNTDIR/$NAME-ipc \
+	#--map-root-user \
+	#--user \
 #	/bin/bash -c "echo chrooting into the rootfs ; chroot $ROOTFS"
 sudo unshare \
 	--pid \
+	--ipc \
+	--cgroup \
 	--keep-caps \
 	--mount=$MOUNTDIR/$NAME-mount \
 	--root=$ROOTFS \
