@@ -68,9 +68,8 @@ sudo unshare \
 	--cgroup \
 	--keep-caps \
 	--mount=$MOUNTDIR/$NAME-mount \
-	--root=$ROOTFS \
 	--fork \
-	/bin/bash
+	/bin/bash ./docker-deploy-debian.sh
 
 if false ; then
 	echo Chrooting into the fs
